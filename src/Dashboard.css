@@ -1,9 +1,9 @@
 .root {
-  flex-grow: 1;
+  flex: 1;
   height: 100vh;
   overflow: auto;
 }
 
 .title {
-  flex-grow: 1;
+  flex: 1;
 }
