@@ -7,6 +7,7 @@
     "start": "nodemon ./src/App.ts",
     "startProd": "node ./build/App.js",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src",
     "build": "tsc"
   },
   "keywords": [],
@@ -14,6 +15,10 @@
   "license": "ISC",
   "devDependencies": {
     "@types/express": "^4.17.7",
+    "@typescript-eslint/eslint-plugin": "^3.8.0",
+    "eslint": "^7.6.0",
+    "eslint-config-airbnb-typescript": "^9.0.0",
+    "eslint-plugin-import": "^2.22.0",
     "nodemon": "^2.0.4",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7"
