@@ -22,7 +22,7 @@ function parseRawMessage(message: any, title: string) {
 }
 
 function storeChatData(messageData: any) {
-  const { title, participants } = messageData;
+  const { title } = messageData;
 
   const messages: any[] = [];
 
@@ -37,7 +37,6 @@ function storeChatData(messageData: any) {
   db.messages.insert(messages);
   db.chatNames.insert({
     title,
-    participants: participants.map((participant: any) => participant.name),
   });
 }
 
