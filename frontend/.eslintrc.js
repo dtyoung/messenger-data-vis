@@ -3,4 +3,7 @@ module.exports = {
   parserOptions: {
     project: './tsconfig.json',
   },
+  rules: {
+    "react/prefer-stateless-function": "off"
+  }
 };

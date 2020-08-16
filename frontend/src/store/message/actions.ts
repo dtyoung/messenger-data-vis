@@ -12,3 +12,9 @@ export function populateChats(chats: {title: string, _id: string}[]) {
     chats,
   });
 }
+
+export function deselectChat(chatTitle: string) {
+  return action(Constants.DESELECT_CHAT, {
+    chatTitle,
+  });
+}
