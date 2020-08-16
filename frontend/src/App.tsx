@@ -1,28 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
 import './App.css';
+import { MessageActions } from './store/message/types';
+import * as actions from './store/message/actions';
+import Dashboard from './Dashboard';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit
-          <code>src/App.tsx</code>
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const mapDispatchToProps = (dispatch: Dispatch<MessageActions>) => {
+  return ({
+    populateChatTitles: (chats: {title: string, _id: string}[]) => {
+      dispatch(actions.populateChats(chats));
+    },
+  });
+};
+
+type ReduxType = ReturnType<typeof mapDispatchToProps>;
+
+class App extends Component<ReduxType> {
+  componentDidMount() {
+    const { populateChatTitles } = this.props;
+
+    fetch('/chat_names')
+      .then(async (res: any) => {
+        const chats = await res.json();
+        populateChatTitles(chats);
+      });
+  }
+
+  render() {
+    return (
+      <Dashboard />
+    );
+  }
 }
 
-export default App;
+export default connect(null, mapDispatchToProps)(App);
