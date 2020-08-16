@@ -10,6 +10,7 @@ import ChatNameTile from './ChatNameTile';
 interface IState {
   chatNames: Array<string>,
   selectedChatNames: Array<string>,
+  messages: Array<Object>
 }
 
 interface IProps {}
@@ -20,6 +21,7 @@ class ChatSelector extends React.Component<IProps, IState> {
     this.state = {
       chatNames: ['Chat Name 1', 'Chat Name 2', 'Chat Name 3', 'Chat Name 4'],
       selectedChatNames: [],
+      messages: [],
     };
   }
 
@@ -34,6 +36,13 @@ class ChatSelector extends React.Component<IProps, IState> {
 
   handleChatSelect = (event: any) => {
     const chatName = event.target.value;
+
+    fetch(`/chat/${chatName}`)
+      .then(async (res: any) => {
+        const messages = await res.json();
+        this.setState({ messages });
+        console.log(this.state.messages);
+      });
 
     this.setState((state) => ({
       selectedChatNames: state.selectedChatNames.concat(chatName),
