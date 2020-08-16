@@ -18,3 +18,10 @@ export function deselectChat(chatTitle: string) {
     chatTitle,
   });
 }
+
+export function populateMessagesForChat(chatTitle: string, messages: any) {
+  return action(Constants.POPULATE_CHAT_MESSAGES, {
+    chatTitle,
+    messages,
+  });
+}

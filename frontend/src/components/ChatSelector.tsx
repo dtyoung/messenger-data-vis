@@ -20,16 +20,35 @@ const mapStateToProps = ({ messages }: IRootState) => {
 const mapDispatcherToProps = (dispatch: Dispatch<MessageActions>) => ({
   selectChat: (chatTitle: string) => dispatch(actions.selectChat(chatTitle)),
   deselectChat: (chatTitle: string) => dispatch(actions.deselectChat(chatTitle)),
+  populateMessagesForChat: (chatTitle: string, messages: Object[]) => {
+    dispatch(actions.populateMessagesForChat(chatTitle, messages));
+  },
 });
 
 type ReduxType = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatcherToProps>;
 
 class ChatSelector extends React.Component<ReduxType> {
+  requestMessageData = (chatTitle: string) => {
+    const { populateMessagesForChat } = this.props;
+    fetch(`/chat/${chatTitle}`)
+      .then(async (res: Response) => {
+        const messages = await res.json();
+        populateMessagesForChat(chatTitle, messages);
+      });
+  };
+
+  handleChatSelect = (event: any) => {
+    const { selectChat } = this.props;
+    const chatTitle = event.target.value;
+
+    selectChat(chatTitle);
+    this.requestMessageData(chatTitle);
+  };
+
   render() {
     const {
       chatTitles,
       selectedChats,
-      selectChat,
       deselectChat,
     } = this.props;
 
@@ -42,7 +61,7 @@ class ChatSelector extends React.Component<ReduxType> {
               label="Select"
               value=""
               fullWidth
-              onChange={(event) => selectChat(event.target.value)}
+              onChange={this.handleChatSelect}
               placeholder="Select Chats to Display"
               margin="normal"
               variant="outlined"
