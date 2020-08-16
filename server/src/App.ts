@@ -11,18 +11,14 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.get('/chat_names', async (req: Request, res: Response) => {
-  db.chatNames.find({}, (err: any, docs: any) => {
-    if (err) { console.log(err); }
-
+  db.chatNames.find({}, (_: any, docs: any) => {
     res.status(200).send(docs);
   });
 });
 
 app.get('/chat/:chatTitle', async (req: Request, res: Response) => {
   const { chatTitle } = req.params;
-  db.messages.find({ chatTitle }, (err: any, docs: any) => {
-    if (err) { console.log(err); }
-
+  db.messages.find({ chatTitle }, (_: any, docs: any) => {
     res.status(200).send(docs);
   });
 });

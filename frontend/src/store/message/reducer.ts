@@ -4,6 +4,7 @@ import Constants from './constants';
 const init: IMessagesState = {
   chatTitles: [],
   selectedChats: [],
+  messagesByChat: [],
 };
 
 function messageReducer(state: IMessagesState = init, action: MessageActions): IMessagesState {
@@ -12,6 +13,17 @@ function messageReducer(state: IMessagesState = init, action: MessageActions): I
       return {
         ...state,
         chatTitles: action.payload.chats.map((chat) => (chat.title)),
+      };
+    case Constants.POPULATE_CHAT_MESSAGES:
+      if (state.messagesByChat.filter((c) => c.chatTitle === action.payload.chatTitle).length > 0) {
+        return state;
+      }
+      return {
+        ...state,
+        messagesByChat: state.messagesByChat.concat({
+          chatTitle: action.payload.chatTitle,
+          messages: action.payload.messages,
+        }),
       };
     case Constants.SELECT_CHAT:
       return {
