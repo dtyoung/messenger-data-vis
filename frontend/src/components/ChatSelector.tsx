@@ -17,48 +17,21 @@ const mapStateToProps = ({ messages }: IRootState) => {
   return { chatTitles, selectedChats };
 };
 
-const mapDispatcherToProps = (dispatch: Dispatch<MessageActions>) => {
-  return ({
-    selectChat: (chatTitle: string) => dispatch(actions.selectChat(chatTitle)),
-  });
-};
+const mapDispatcherToProps = (dispatch: Dispatch<MessageActions>) => ({
+  selectChat: (chatTitle: string) => dispatch(actions.selectChat(chatTitle)),
+  deselectChat: (chatTitle: string) => dispatch(actions.deselectChat(chatTitle)),
+});
 
 type ReduxType = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatcherToProps>;
 
-interface IState {
-  chatNames: Array<string>,
-  selectedChatNames: Array<string>,
-  messages: Array<Object>
-}
-
-interface IProps {}
-
 class ChatSelector extends React.Component<ReduxType> {
-  handleChatSelect = (event: any) => {
-    // const chatName = event.target.value;
-
-    // fetch(`/chat/${chatName}`)
-    //   .then(async (res: any) => {
-    //     const messages = await res.json();
-    //     this.setState({ messages });
-    //     console.log(this.state.messages);
-    //   });
-
-    // this.setState((state) => ({
-    //   selectedChatNames: state.selectedChatNames.concat(chatName),
-    //   chatNames: state.chatNames.filter((item) => item !== chatName),
-    // }));
-  };
-
-  handleRemoveChat = (chatName: string) => {
-    // this.setState((state) => ({
-    //   selectedChatNames: state.selectedChatNames.filter((item) => item !== chatName),
-    //   chatNames: state.chatNames.concat(chatName),
-    // }));
-  };
-
   render() {
-    const { chatTitles, selectedChats, selectChat } = this.props;
+    const {
+      chatTitles,
+      selectedChats,
+      selectChat,
+      deselectChat,
+    } = this.props;
 
     return (
       <Paper elevation={4} style={{ padding: '8px' }}>
@@ -86,7 +59,7 @@ class ChatSelector extends React.Component<ReduxType> {
               <ChatNameTile
                 key={chatName}
                 chatName={chatName}
-                deleteCallback={this.handleRemoveChat}
+                deleteCallback={deselectChat}
               />
             ))}
           </Grid>

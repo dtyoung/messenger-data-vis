@@ -6,13 +6,11 @@ import { MessageActions } from './store/message/types';
 import * as actions from './store/message/actions';
 import Dashboard from './Dashboard';
 
-const mapDispatchToProps = (dispatch: Dispatch<MessageActions>) => {
-  return ({
-    populateChatTitles: (chats: {title: string, _id: string}[]) => {
-      dispatch(actions.populateChats(chats));
-    },
-  });
-};
+const mapDispatchToProps = (dispatch: Dispatch<MessageActions>) => ({
+  populateChatTitles: (chats: {title: string, _id: string}[]) => {
+    dispatch(actions.populateChats(chats));
+  },
+});
 
 type ReduxType = ReturnType<typeof mapDispatchToProps>;
 
