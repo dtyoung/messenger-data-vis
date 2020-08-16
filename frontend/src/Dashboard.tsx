@@ -3,6 +3,7 @@ import {
   AppBar, Container, Grid, Paper, Toolbar, Typography,
 } from '@material-ui/core';
 import { Line } from 'react-chartjs-2';
+import ChatSelector from './components/ChatSelector';
 
 import './Dashboard.css';
 
@@ -46,6 +47,9 @@ function Dashboard() {
       <main>
         <Container>
           <Grid container spacing={3} direction="column">
+            <Grid item>
+              <ChatSelector />
+            </Grid>
             <Grid item>
               <Paper>
                 <Line data={data} />
