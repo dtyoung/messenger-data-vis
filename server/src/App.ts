@@ -18,6 +18,15 @@ app.get('/chat_names', async (req: Request, res: Response) => {
   });
 });
 
+app.get('/chat/:chatTitle', async (req: Request, res: Response) => {
+  const { chatTitle } = req.params;
+  db.messages.find({ chatTitle }, (err: any, docs: any) => {
+    if (err) { console.log(err); }
+
+    res.status(200).send(docs);
+  });
+});
+
 app.listen(8000, () => {
   // eslint-disable-next-line no-console
   console.log('Server Started at Port, 8000');
