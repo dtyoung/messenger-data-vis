@@ -16,7 +16,10 @@
     "react": "^16.13.1",
     "react-chartjs-2": "^2.9.0",
     "react-dom": "^16.13.1",
+    "react-redux": "^7.2.1",
     "react-scripts": "3.4.1",
+    "redux": "^4.0.5",
+    "typesafe-actions": "^5.1.0",
     "typescript": "^3.9.7"
   },
   "scripts": {
@@ -43,6 +46,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-redux": "^7.1.9",
     "@typescript-eslint/eslint-plugin": "^3.6.1",
     "eslint-config-airbnb-typescript": "^9.0.0",
     "eslint-plugin-import": "^2.22.0",

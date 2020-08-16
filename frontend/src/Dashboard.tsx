@@ -4,7 +4,6 @@ import {
 } from '@material-ui/core';
 import { Line } from 'react-chartjs-2';
 import ChatSelector from './components/ChatSelector';
-
 import './Dashboard.css';
 
 const data = {
